@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nullや空の安全な扱い</title>
+  <style>
+    body { margin:0; padding:16px; background:#f6f7f9; color:#111; }
+    main { max-width:900px; margin:0 auto; background:#fff; padding:16px; border:1px solid #e5e7eb; border-radius:10px; }
+    section { margin:12px 0; padding:12px; border:1px solid #e5e7eb; border-radius:10px; }
+    .small { color:#6b7280; font-size:12px; margin:6px 0 0; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:baseline; margin:6px 0; }
+    .k { min-width:12em; color:#6b7280; }
+    .v { font-weight:700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Nullや空の安全な扱い</h1>
+  <p class="small">画面側で null や空が来ても、エラーにせず表示できるようにします。</p>
+
+  <section>
+    <h2>表示のデフォルト（?:）</h2>
+    <div class="row">
+      <div class="k">ニックネーム（null）</div>
+      <div class="v" th:text="${nicknameNull ?: '（未設定）'}"></div>
+    </div>
+    <div class="row">
+      <div class="k">ニックネーム（空文字）</div>
+      <div class="v" th:text="${nicknameEmpty ?: '（未設定）'}"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>nullでもエラーにしない（?.）</h2>
+    <div class="row">
+      <div class="k">greetingNull の長さ</div>
+      <div class="v" th:text="${greetingNull?.length()}"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>リスト・マップ・セットの空判定</h2>
+
+    <div class="row">
+      <div class="k">List</div>
+      <div class="v" th:text="${#lists.isEmpty(emptyList) ? 'ありません' : 'あります'}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">Map</div>
+      <div class="v" th:text="${#maps.isEmpty(emptyMap) ? 'ありません' : 'あります'}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">Set</div>
+      <div class="v" th:text="${#sets.isEmpty(emptySet) ? 'ありません' : 'あります'}"></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
