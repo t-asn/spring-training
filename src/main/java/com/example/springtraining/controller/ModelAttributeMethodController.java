@@ -16,14 +16,10 @@ public class ModelAttributeMethodController {
 
   /**
    * ハンドラーメソッドの前に呼ばれるメソッド。
-   *
-   * ・戻り値あり
-   * ・`@ModelAttribute("roles")`でModelに登録する際のキー名を指定している
-   * ため、
-   *
-   * ・キー名: "roles"
-   * ・値: このメソッドの戻り値
-   * がModelに登録される。
+   * <p>
+   * ・戻り値あり ・`@ModelAttribute("roles")`でModelに登録する際のキー名を指定している ため、
+   * <p>
+   * ・キー名: "roles" ・値: このメソッドの戻り値 がModelに登録される。
    */
   @ModelAttribute("roles")
   public List<String> roles() {
@@ -32,45 +28,43 @@ public class ModelAttributeMethodController {
 
   /**
    * ハンドラーメソッドの前に呼ばれるメソッド。
-   *
-   * ・戻り値あり
-   * ・`@ModelAttribute`で名前を指定していない
-   * のため、
-   *
-   * ・キー名: registerForm（戻り値の型であるRegisterFormのローワーキャメルケース）
-   * ・値: このメソッドの戻り値
-   * がModelに登録される。
+   * <p>
+   * ・戻り値あり ・`@ModelAttribute`で名前を指定していない のため、
+   * <p>
+   * ・キー名: registerForm（戻り値の型であるRegisterFormのローワーキャメルケース） ・値: このメソッドの戻り値 がModelに登録される。
    */
-  @ModelAttribute
-  public RegisterForm form() {
-    return new RegisterForm();
-  }
+  public class RegisterForm {
 
-  /**
-   * ハンドラーメソッドの前に呼ばれるメソッド。
-   *
-   * 戻り値なしのため、
-   * model.addAttributeで指定したキーと値がModelに登録される。
-   */
-  @ModelAttribute
-  public void common(Model model) {
-    model.addAttribute("appName", "@ModelAttributeの動作確認");
-    model.addAttribute("today", LocalDate.now());
-  }
+    @ModelAttribute
+    public RegisterForm form() {
+      return new RegisterForm();
+    }
 
-  /**
-   * 一覧およびフォーム画面。
-   */
-  @GetMapping
-  public String index() {
-    return "model-attribute-method/form";
-  }
+    /**
+     * ハンドラーメソッドの前に呼ばれるメソッド。
+     * <p>
+     * 戻り値なしのため、 model.addAttributeで指定したキーと値がModelに登録される。
+     */
+    @ModelAttribute
+    public void common(Model model) {
+      model.addAttribute("appName", "@ModelAttributeの動作確認");
+      model.addAttribute("today", LocalDate.now());
+    }
 
-  /**
-   * フォームの送信結果画面。
-   */
-  @PostMapping
-  public String submit(@ModelAttribute RegisterForm form) {
-    return "model-attribute-method/result";
+    /**
+     * 一覧およびフォーム画面。
+     */
+    @GetMapping
+    public String index() {
+      return "model-attribute-method/form";
+    }
+
+    /**
+     * フォームの送信結果画面。
+     */
+    @PostMapping
+    public String submit(@ModelAttribute RegisterForm form) {
+      return "model-attribute-method/result";
+    }
   }
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>@ModelAttribute デモ（フォーム）</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f6f7f9;
+      color: #111;
+    }
+
+    .card {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .hint {
+      margin: 8px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .label-col {
+      width: 38%;
+    }
+
+    .actions {
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="card">
+  <h1>@ModelAttribute デモ（フォーム）</h1>
+
+  <p class="hint">
+    Controller の <code>@ModelAttribute</code> により Model に登録された値を表示します。
+  </p>
+
+  <h2 class="hint">Model に登録されている値（キー名 → 値）</h2>
+  <table>
+    <thead>
+    <tr>
+      <th class="label-col">項目</th>
+      <th>値</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>appName（キー）</td>
+      <td th:text="${appName}">-</td>
+    </tr>
+    <tr>
+      <td>today（キー）</td>
+      <td th:text="${#temporals.format(today, 'yyyy/MM/dd')}">-</td>
+    </tr>
+    <tr>
+      <td>roles（キー）</td>
+      <td>
+        <ul>
+          <li th:each="r : ${roles}" th:text="${r}">-</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2 class="hint">ユーザー登録フォーム</h2>
+
+  <form th:action="@{/model-attribute-method}" th:object="${registerForm}" method="post">
+    <table>
+      <thead>
+      <tr>
+        <th class="label-col">項目</th>
+        <th>値</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>氏名（registerForm.name）</td>
+        <td>
+          <input type="text" th:field="*{name}" placeholder="例：田中"/>
+        </td>
+      </tr>
+      <tr>
+        <td>年齢（registerForm.age）</td>
+        <td>
+          <input type="number" min="0" th:field="*{age}" placeholder="例：20"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <p class="actions">
+      <button type="submit">送信</button>
+    </p>
+  </form>
+</div>
+</body>
+</html>
