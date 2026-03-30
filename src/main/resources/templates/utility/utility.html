@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ユーティリティ関数</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #f6f7f9;
+      color: #111;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+
+    section {
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+
+    .small {
+      color: #6b7280;
+      font-size: 12px;
+      margin: 6px 0 0;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin: 6px 0;
+    }
+
+    .k {
+      min-width: 12em;
+      color: #6b7280;
+    }
+
+    .v {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>ユーティリティ関数</h1>
+  <p class="small">テンプレート側で整形したいときに使います。</p>
+
+  <section>
+    <h2>日付・時刻の整形（#temporals）</h2>
+
+    <div class="row">
+      <div class="k">LocalDateTime</div>
+      <div class="v" th:text="${#temporals.format(ldt, 'yyyy/MM/dd HH:mm:ss')}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">LocalDate</div>
+      <div class="v" th:text="${#temporals.format(ld, 'yyyy/MM/dd')}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">LocalTime</div>
+      <div class="v" th:text="${#temporals.format(lt, 'HH:mm:ss')}"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>数値の整形（#numbers）</h2>
+
+    <div class="row">
+      <div class="k">3桁ゼロ埋め</div>
+      <div class="v" th:text="${#numbers.formatInteger(num, 3)}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">繰り返し（1〜5）</div>
+      <div class="v">
+        <span th:each="i : ${#numbers.sequence(1,5)}" th:text="${'No.' + i + ' ' }"></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>文字列の整形（#strings）</h2>
+
+    <div class="row">
+      <div class="k">大文字</div>
+      <div class="v" th:text="${#strings.toUpperCase(upperSrc)}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">小文字</div>
+      <div class="v" th:text="${#strings.toLowerCase(lowerSrc)}"></div>
+    </div>
+
+    <div class="row">
+      <div class="k">省略（20文字）</div>
+      <div class="v" th:text="${#strings.abbreviate(longText, 20)}"></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
