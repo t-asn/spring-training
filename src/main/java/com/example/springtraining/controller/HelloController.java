@@ -26,6 +26,6 @@ public class HelloController {
 
     String greetMessage = helloService.greet("太郎");
     model.addAttribute("greetMessage", greetMessage);
-    return "hello";
+    return "model/hello";
   }
 }

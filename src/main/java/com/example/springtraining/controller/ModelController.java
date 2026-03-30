@@ -16,6 +16,6 @@ public class ModelController {
     Profile profile = new Profile(fullName, 25);
     User user = new User("1", profile);
     model.addAttribute("user", user);
-    return "user";
+    return "model/user";
   }
 }
