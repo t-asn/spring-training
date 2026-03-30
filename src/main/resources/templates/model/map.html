@@ -93,7 +93,10 @@
   <!-- #maps.isEmpty(...) でmapが空であるかを判定できる -->
   <p th:if="${#maps.isEmpty(fruitNameAndStockMap)}">
     データがありません
-  </p>
+
+    <!-- フルーツ在庫マップが空だったらメッセージを表示 -->
+  <p class="no-data" th:if="${#maps.isEmpty(fruitNameAndStockMap)}">データがありません</p>
+  <p class="no-data" th:if="${#maps.isEmpty(fruitNameAndStockMap)}">データがありません</p>
 </div>
 </body>
 </html>

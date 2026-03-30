@@ -52,6 +52,8 @@
   <p th:if="${#sets.isEmpty(clubSet)}">
     データがありません
   </p>
+  <!-- 部活動のセットが空ならメッセージを表示 -->
+  <p class="no-data" th:if="${#sets.isEmpty(clubSet)}">データがありません</p>
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>学生一覧</title>
 
   <style>
@@ -90,6 +90,15 @@
           <li th:each="subject : ${student.subjectList}" th:text="${subject}"></li>
         </ul>
       </td>
+      <td>
+        <!-- 科目リストが空なら '-' を表示 -->
+        <span style="color:#aaa;" th:if="${#lists.isEmpty(student.subjectList)}">-</span>
+
+        <!-- 科目リストが空でないなら ul/li で一覧表示 -->
+        <ul style="margin:0;padding-left:16px" th:if="${!#lists.isEmpty(student.subjectList)}">
+          <li th:each="subject : ${student.subjectList}" th:text="${subject}"></li>
+        </ul>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -98,6 +107,8 @@
   <p th:if="${#lists.isEmpty(studentList)}">
     データがありません
   </p>
+  <!-- 学生一覧が空だったら「データがありません」と表示 -->
+  <p class="no-data" th:if="${#lists.isEmpty(studentList)}">データがありません</p>
 </div>
 </body>
 </html>
