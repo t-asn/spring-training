@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>部活動</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f6f7f9;
+      color: #111;
+    }
+
+    .card {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 20px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+
+<body>
+<div class="card">
+  <h1>部活動</h1>
+
+  <ul>
+    <!-- setはコレクションなので、th:each="要素 : ${コレクション}" が使える。要素の数だけ表示 -->
+    <li th:each="club : ${clubSet}" th:text="${club}"></li>
+  </ul>
+
+  <!-- #sets.isEmpty(...) でsetが空であるかを判定できる -->
+  <p th:if="${#sets.isEmpty(clubSet)}">
+    データがありません
+  </p>
+</div>
+</body>
+</html>
