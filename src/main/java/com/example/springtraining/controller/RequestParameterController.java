@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RequestParameterController {
 
   /**
-   * `@RequestParam`をつけると、
-   * - リクエストパラメータが代入されること
-   * を確認する用のフォーム画面。
+   * `@RequestParam`をつけると、 - リクエストパラメータが代入されること を確認する用のフォーム画面。
    */
   @GetMapping("/request-param-form")
   public String requestParamForm() {
@@ -22,9 +20,7 @@ public class RequestParameterController {
   }
 
   /**
-   * `@RequestParam`をつけると、
-   * - リクエストパラメータが代入されること
-   * を確認する用の結果画面。
+   * `@RequestParam`をつけると、 - リクエストパラメータが代入されること を確認する用の結果画面。
    */
   @GetMapping("/request-param-result")
   public String requestParamResult(@RequestParam(required = false) String keyword, Model model) {
@@ -33,9 +29,7 @@ public class RequestParameterController {
   }
 
   /**
-   * `@RequestParam`を省略しても、
-   * - リクエストパラメータが代入されること
-   * を確認する用の結果画面。
+   * `@RequestParam`を省略しても、 - リクエストパラメータが代入されること を確認する用の結果画面。
    */
   @GetMapping("/request-param-omit-result")
   public String requestParamOmitResult(String keyword, Model model) {
@@ -44,36 +38,30 @@ public class RequestParameterController {
   }
 
   /**
-   * `@ModelAttribute`をつけると、
-   * - リクエストパラメータが代入されること
-   * - Modelに自動的にオブジェクトが登録されること
-   * を確認する用のフォーム画面。
+   * `@ModelAttribute`をつけると、 - リクエストパラメータが代入されること - Modelに自動的にオブジェクトが登録されること を確認する用のフォーム画面。
    */
-  @GetMapping("/model-attribute-form")
-  public String modelAttributeForm(Model model) {
-    model.addAttribute("registerForm", new RegisterForm());
-    return "request-parameter/model-attribute-form";
-  }
+  public class RegisterForm {
 
-  /**
-   * `@ModelAttribute`をつけると、
-   * - リクエストパラメータが代入されること
-   * - Modelに自動的にオブジェクトが登録されること
-   * を確認する用の結果画面。
-   */
-  @PostMapping("/model-attribute-result")
-  public String modelAttributeResult(@ModelAttribute RegisterForm form) {
-    return "request-parameter/model-attribute-result";
-  }
+    @GetMapping("/model-attribute-form")
+    public String modelAttributeForm(Model model) {
+      model.addAttribute("registerForm", new RegisterForm());
+      return "request-parameter/model-attribute-form";
+    }
 
-  /**
-   * `@ModelAttribute`を省略しても、
-   * - リクエストパラメータが代入されること
-   * - Modelに自動的にオブジェクトが登録されること
-   * を確認する用の結果画面。
-   */
-  @PostMapping("/model-attribute-omit-result")
-  public String modelAttributeOmitResult(RegisterForm form) {
-    return "request-parameter/model-attribute-result";
+    /**
+     * `@ModelAttribute`をつけると、 - リクエストパラメータが代入されること - Modelに自動的にオブジェクトが登録されること を確認する用の結果画面。
+     */
+    @PostMapping("/model-attribute-result")
+    public String modelAttributeResult(@ModelAttribute RegisterForm form) {
+      return "request-parameter/model-attribute-result";
+    }
+
+    /**
+     * `@ModelAttribute`を省略しても、 - リクエストパラメータが代入されること - Modelに自動的にオブジェクトが登録されること を確認する用の結果画面。
+     */
+    @PostMapping("/model-attribute-omit-result")
+    public String modelAttributeOmitResult(RegisterForm form) {
+      return "request-parameter/model-attribute-result";
+    }
   }
 }
